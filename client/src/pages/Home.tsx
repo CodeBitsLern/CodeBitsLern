@@ -363,10 +363,16 @@ export default function Home() {
       </section>
 
       {/* ===== VIDEOS SECTION (FOLDER VIEW) ===== */}
-      <section id="videos" className="py-16 px-4 bg-gradient-to-b from-slate-50 to-white">
+      <section id="videos" className="py-16 px-4 bg-gradient-to-b from-blue-50 to-slate-50 border-t-4 border-blue-500">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-slate-900 mb-8">الفيديوهات التعليمية</h2>
-          <p className="text-slate-600 mb-8">انقر على أي مجلد لعرض الفيديوهات بداخله</p>
+          <div className="mb-8">
+            <h2 className="text-4xl font-bold text-blue-900 mb-2 flex items-center gap-3">
+              <span className="text-5xl">🎥</span>
+              الفيديوهات التعليمية
+            </h2>
+            <p className="text-slate-600 text-lg">مجموعة من الفيديوهات المبسطة والمباشرة للمبتدئين</p>
+            <p className="text-blue-600 font-medium mt-2">✅ انقر على أي مجلد لعرض الفيديوهات بداخله</p>
+          </div>
           
           {/* Videos Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
