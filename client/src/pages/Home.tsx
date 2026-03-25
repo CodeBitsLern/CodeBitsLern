@@ -310,7 +310,7 @@ export default function Home() {
           
           {/* Filter Buttons */}
           <div className="flex gap-3 mb-8 flex-wrap">
-            {['all', 'code', 'software', 'videos'].map(filter => (
+            {['all', 'code', 'software', 'video'].map(filter => (
               <button
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
