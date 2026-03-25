@@ -316,6 +316,12 @@ export default function Home() {
                 {filter === 'all' ? 'الكل' : filter === 'code' ? 'أكواد' : 'برامج'}
               </button>
             ))}
+            <a
+              href="#videos"
+              className="px-6 py-2 rounded-lg font-medium transition bg-white text-slate-700 border border-slate-300 hover:border-blue-600 hover:text-blue-600"
+            >
+              فيديوهات
+            </a>
           </div>
 
           {/* Products Grid */}
