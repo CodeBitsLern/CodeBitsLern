@@ -252,7 +252,7 @@ export default function Home() {
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100" dir="rtl" style={{ scrollBehavior: 'smooth' }}>
       {/* ===== HEADER ===== */}
       <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -614,6 +614,9 @@ export default function Home() {
 
       {/* ===== OWNERSHIP BAR ===== */}
       <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
         @keyframes scrollLeft {
           0% {
             transform: translateX(100%);
