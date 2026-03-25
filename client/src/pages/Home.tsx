@@ -220,7 +220,7 @@ export default function Home() {
         backgroundAttachment: 'fixed'
       }}>
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="absolute inset-0 bg-white/20"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-3xl font-bold text-slate-900 mb-8">المنتجات</h2>
           
