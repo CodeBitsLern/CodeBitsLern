@@ -310,7 +310,7 @@ export default function Home() {
           
           {/* Filter Buttons */}
           <div className="flex gap-3 mb-8 flex-wrap">
-            {['all', 'code', 'software'].map(filter => (
+            {['all', 'code', 'software', 'videos'].map(filter => (
               <button
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
@@ -320,15 +320,9 @@ export default function Home() {
                     : 'bg-white text-slate-700 border border-slate-300 hover:border-blue-600'
                 }`}
               >
-                {filter === 'all' ? 'الكل' : filter === 'code' ? 'أكواد' : 'برامج'}
+                {filter === 'all' ? 'الكل' : filter === 'code' ? 'أكواد' : filter === 'software' ? 'برامج' : 'فيديوهات'}
               </button>
             ))}
-            <a
-              href="#/videos"
-              className="px-6 py-2 rounded-lg font-medium transition bg-white text-slate-700 border border-slate-300 hover:border-blue-600 hover:text-blue-600"
-            >
-              فيديوهات
-            </a>
           </div>
 
           {/* Products Grid */}
