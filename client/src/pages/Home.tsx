@@ -213,8 +213,15 @@ export default function Home() {
       </section>
 
       {/* ===== PRODUCTS SECTION ===== */}
-      <section id="products" className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section id="products" className="py-16 px-4 relative" style={{
+        backgroundImage: 'url(https://d2xsxph8kpxj0f.cloudfront.net/310519663468821472/AgZazcxMHr4gj4EXiFKxW4/youth_electronics_workshop-bdtcxFaBMaGJpEUa77GwVY.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white/85"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-3xl font-bold text-slate-900 mb-8">المنتجات</h2>
           
           {/* Filter Buttons */}
@@ -407,11 +414,31 @@ export default function Home() {
               <p className="text-slate-400">support@codebitslern.com</p>
             </div>
           </div>
-          <div className="border-t border-slate-800 pt-8 text-center text-slate-400">
+           <div className="border-t border-slate-800 pt-8 text-center text-slate-400">
             <p>© 2025 CodeBitsLern. جميع الحقوق محفوظة.</p>
           </div>
         </div>
       </footer>
+
+      {/* ===== OWNERSHIP BAR ===== */}
+      <style>{`
+        @keyframes scrollLeft {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+        .scrolling-text {
+          animation: scrollLeft 8s linear infinite;
+          white-space: nowrap;
+          display: inline-block;
+        }
+      `}</style>
+      <div className="bg-slate-950 text-white py-3 px-4 overflow-hidden">
+        <p className="text-sm font-medium scrolling-text">Owned by Ahmad Taleb</p>
+      </div>
     </div>
   );
 }
