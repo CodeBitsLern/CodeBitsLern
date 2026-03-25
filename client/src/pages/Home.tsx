@@ -194,7 +194,16 @@ const courseCategories = [
     courses: [
       { id: 301, title: "مقدمة في الأردوينو", level: "مبتدئ" },
       { id: 302, title: "الدوائر الإلكترونية الأساسية", level: "مبتدئ" },
-      { id: 303, title: "مشاريع عملية مع الأردوينو", level: "متوسط" }
+      { id: 303, title: "مشاريع عملية مع الأردوينو", level: "متوسط" },
+      { 
+        id: 304, 
+        title: "شرح دارة الأردوينو والحساسات - Arduino Circuits & Sensors", 
+        level: "مبتدئ",
+        isVideo: true,
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        descriptionAr: "شرح مبسط لأجزاء الأردوينو، الحساسات، وكيفية عمل الدارات الإلكترونية.",
+        descriptionEn: "Simple explanation of Arduino parts, sensors, and how electronic circuits work."
+      }
     ],
     hasGuide: true,
     guidePdf: "https://d2xsxph8kpxj0f.cloudfront.net/310519663468821472/AgZazcxMHr4gj4EXiFKxW4/arduino_guide_f39df1c4.pdf"
@@ -512,19 +521,43 @@ export default function Home() {
           <div className="space-y-4">
             <p className="text-slate-600">{selectedCourse?.description}</p>
             
+            {/* Video Player for Course Videos */}
+            {selectedCourse?.courses.some(c => c.isVideo) && (
+              <div className="bg-black rounded-lg overflow-hidden shadow-xl aspect-video relative mb-6">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`${selectedCourse?.courses.find(c => c.isVideo)?.videoUrl}?controls=1&rel=0&modestbranding=1`}
+                  title={selectedCourse?.courses.find(c => c.isVideo)?.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                ></iframe>
+                <div className="absolute inset-0 pointer-events-none" onContextMenu={(e) => e.preventDefault()}></div>
+              </div>
+            )}
+
             {/* Courses List */}
             <div className="space-y-2">
-              <h4 className="font-bold text-slate-900 mb-3">الدورات المتاحة:</h4>
+              <h4 className="font-bold text-slate-900 mb-3">الدورات والفيديوهات المتاحة:</h4>
               {selectedCourse?.courses.map(course => (
                 <div key={course.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition">
                   <div className="flex items-center gap-3">
-                    <FileText className="w-5 h-5 text-blue-600" />
+                    {course.isVideo ? (
+                      <PlayCircle className="w-5 h-5 text-red-600" />
+                    ) : (
+                      <FileText className="w-5 h-5 text-blue-600" />
+                    )}
                     <div className="text-right">
                       <p className="font-medium text-slate-900">{course.title}</p>
                       <p className="text-sm text-slate-500">{course.level}</p>
+                      {course.descriptionAr && (
+                        <p className="text-xs text-slate-600 mt-1">{course.descriptionAr}</p>
+                      )}
                     </div>
                   </div>
-                  <Button variant="outline" size="sm">عرض</Button>
+                  <Button variant="outline" size="sm" disabled>مضمن</Button>
                 </div>
               ))}
             </div>
