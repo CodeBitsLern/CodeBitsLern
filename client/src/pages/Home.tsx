@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Folder, ChevronRight, FileText, Download } from 'lucide-react';
+import { Folder, ChevronRight, FileText, Download, PlayCircle } from 'lucide-react';
 
 // ===== PRODUCTS DATA =====
 const products = [
@@ -82,6 +82,82 @@ const products = [
   }
 ];
 
+// ===== VIDEOS DATA WITH FOLDER STRUCTURE =====
+const videoCategories = [
+  {
+    id: 1,
+    name: "فيديوهات تطوير الويب",
+    icon: "🌐",
+    description: "فيديوهات شاملة عن HTML, CSS, JavaScript, React",
+    count: 15,
+    courses: [
+      { id: 1001, title: "مقدمة في HTML", level: "مبتدئ" },
+      { id: 1002, title: "CSS المتقدم والتصميم", level: "متوسط" },
+      { id: 1003, title: "JavaScript من الصفر", level: "مبتدئ" },
+      { id: 1004, title: "React عملي", level: "متوسط" },
+      { id: 1005, title: "Node.js والـ Backend", level: "متقدم" }
+    ]
+  },
+  {
+    id: 2,
+    name: "فيديوهات Python والذكاء الاصطناعي",
+    icon: "🐍",
+    description: "فيديوهات عملية عن Python وتطبيقات الذكاء الاصطناعي",
+    count: 20,
+    courses: [
+      { id: 2001, title: "Python الأساسيات", level: "مبتدئ" },
+      { id: 2002, title: "مكتبة NumPy و Pandas", level: "متوسط" },
+      { id: 2003, title: "Machine Learning عملي", level: "متقدم" },
+      { id: 2004, title: "Deep Learning والشبكات العصبية", level: "متقدم" }
+    ]
+  },
+  {
+    id: 3,
+    name: "دارات الأردوينو",
+    icon: "⚡",
+    description: "فيديوهات تعليمية عن الأردوينو والحساسات (عربي/إنجليزي)",
+    count: 1,
+    courses: [
+      { 
+        id: 3001, 
+        title: "شرح دارة الأردوينو والحساسات - Arduino Circuits & Sensors", 
+        level: "مبتدئ",
+        isVideo: true,
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // رابط تجريبي، يمكن تغييره لاحقاً
+        descriptionAr: "شرح مبسط لأجزاء الأردوينو، الحساسات، وكيفية عمل الدارات الإلكترونية.",
+        descriptionEn: "Simple explanation of Arduino parts, sensors, and how electronic circuits work."
+      }
+    ],
+    hasGuide: true,
+    guidePdf: "https://d2xsxph8kpxj0f.cloudfront.net/310519663468821472/AgZazcxMHr4gj4EXiFKxW4/arduino_guide_f39df1c4.pdf"
+  },
+  {
+    id: 4,
+    name: "فيديوهات تطوير التطبيقات",
+    icon: "📱",
+    description: "فيديوهات عن Flutter, React Native والتطبيقات الجوالة",
+    count: 14,
+    courses: [
+      { id: 4001, title: "Flutter للمبتدئين", level: "مبتدئ" },
+      { id: 4002, title: "Dart البرمجية", level: "متوسط" },
+      { id: 4003, title: "React Native", level: "متوسط" },
+      { id: 4004, title: "نشر التطبيقات", level: "متقدم" }
+    ]
+  },
+  {
+    id: 5,
+    name: "فيديوهات الأمن السيبراني",
+    icon: "🔐",
+    description: "فيديوهات عن الأمن والـ Ethical Hacking",
+    count: 10,
+    courses: [
+      { id: 5001, title: "أساسيات الأمن السيبراني", level: "مبتدئ" },
+      { id: 5002, title: "Ethical Hacking", level: "متقدم" },
+      { id: 5003, title: "اختبار الاختراق", level: "متقدم" }
+    ]
+  }
+];
+
 // ===== COURSES DATA WITH FOLDER STRUCTURE =====
 const courseCategories = [
   {
@@ -150,6 +226,8 @@ const courseCategories = [
 export default function Home() {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [selectedCourse, setSelectedCourse] = useState<typeof courseCategories[0] | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<typeof videoCategories[0] | null>(null);
+  const [activeVideo, setActiveVideo] = useState<any>(null);
   const [cart, setCart] = useState<any[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -184,6 +262,7 @@ export default function Home() {
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#products" className="text-slate-700 hover:text-slate-900 font-medium">المتجر</a>
+            <a href="#videos" className="text-slate-700 hover:text-slate-900 font-medium">الفيديوهات</a>
             <a href="#courses" className="text-slate-700 hover:text-slate-900 font-medium">الدورات</a>
             <button 
               onClick={() => setCartOpen(true)}
@@ -207,7 +286,7 @@ export default function Home() {
           <p className="text-xl text-blue-100 mb-8">متجرك الأول لتعلم البرمجة واحتراف التطوير</p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button className="bg-white text-blue-600 hover:bg-blue-50">تصفح المتجر</Button>
-            <Button variant="outline" className="border-white text-white hover:bg-blue-700">شاهد الدورات</Button>
+            <Button variant="outline" className="border-white text-white hover:bg-blue-700">شاهد الفيديوهات</Button>
           </div>
         </div>
       </section>
@@ -219,14 +298,12 @@ export default function Home() {
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
       }}>
-        {/* Overlay for better text readability */}
-        {/* No overlay for natural colors */}
         <div className="max-w-7xl mx-auto relative z-10">
           <h2 className="text-3xl font-bold text-slate-900 mb-8">المنتجات</h2>
           
           {/* Filter Buttons */}
           <div className="flex gap-3 mb-8 flex-wrap">
-            {['all', 'video', 'code', 'software'].map(filter => (
+            {['all', 'code', 'software'].map(filter => (
               <button
                 key={filter}
                 onClick={() => setSelectedFilter(filter)}
@@ -236,7 +313,7 @@ export default function Home() {
                     : 'bg-white text-slate-700 border border-slate-300 hover:border-blue-600'
                 }`}
               >
-                {filter === 'all' ? 'الكل' : filter === 'video' ? 'فيديوهات' : filter === 'code' ? 'أكواد' : 'برامج'}
+                {filter === 'all' ? 'الكل' : filter === 'code' ? 'أكواد' : 'برامج'}
               </button>
             ))}
           </div>
@@ -272,6 +349,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===== VIDEOS SECTION (FOLDER VIEW) ===== */}
+      <section id="videos" className="py-16 px-4 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-slate-900 mb-8">الفيديوهات التعليمية</h2>
+          <p className="text-slate-600 mb-8">انقر على أي مجلد لعرض الفيديوهات بداخله</p>
+          
+          {/* Videos Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {videoCategories.map(category => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedVideo(category)}
+                className="group relative bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-300 rounded-lg p-6 hover:border-blue-500 hover:shadow-lg transition text-right"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="text-5xl">{category.icon}</div>
+                  <ChevronRight className="w-6 h-6 text-slate-400 group-hover:text-blue-600 transition" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{category.name}</h3>
+                <p className="text-sm text-slate-600 mb-4">{category.description}</p>
+                <div className="flex items-center gap-2 text-sm text-slate-500">
+                  <Folder className="w-4 h-4" />
+                  <span>{category.count} فيديو</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ===== COURSES SECTION (FOLDER VIEW) ===== */}
       <section id="courses" className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -301,6 +408,90 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ===== MODAL FOR VIDEO DETAILS ===== */}
+      <Dialog open={!!selectedVideo} onOpenChange={() => { setSelectedVideo(null); setActiveVideo(null); }}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto" dir="rtl">
+          <DialogHeader>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-4xl">{selectedVideo?.icon}</span>
+              <DialogTitle>{selectedVideo?.name}</DialogTitle>
+            </div>
+          </DialogHeader>
+          
+          <div className="space-y-6">
+            <p className="text-slate-600">{selectedVideo?.description}</p>
+            
+            {/* Video Player Section */}
+            {activeVideo && (
+              <div className="bg-black rounded-lg overflow-hidden shadow-xl aspect-video relative">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`${activeVideo.videoUrl}?controls=1&rel=0&modestbranding=1`}
+                  title={activeVideo.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                ></iframe>
+                {/* Overlay to discourage right-click/download */}
+                <div className="absolute inset-0 pointer-events-none" onContextMenu={(e) => e.preventDefault()}></div>
+              </div>
+            )}
+
+            {/* Videos List */}
+            <div className="space-y-2">
+              <h4 className="font-bold text-slate-900 mb-3">الفيديوهات المتاحة:</h4>
+              {selectedVideo?.courses.map(video => (
+                <div key={video.id} className={`p-4 rounded-lg transition border-2 ${activeVideo?.id === video.id ? 'bg-blue-50 border-blue-400' : 'bg-slate-50 border-transparent hover:bg-slate-100'}`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <PlayCircle className={`w-6 h-6 ${activeVideo?.id === video.id ? 'text-blue-600' : 'text-slate-400'}`} />
+                      <div className="text-right">
+                        <p className="font-bold text-slate-900">{video.title}</p>
+                        <p className="text-sm text-slate-500">{video.level}</p>
+                      </div>
+                    </div>
+                    <Button 
+                      variant={activeVideo?.id === video.id ? "default" : "outline"} 
+                      size="sm"
+                      onClick={() => setActiveVideo(video)}
+                    >
+                      {activeVideo?.id === video.id ? 'يعرض الآن' : 'تشغيل'}
+                    </Button>
+                  </div>
+                  {video.descriptionAr && (
+                    <div className="mt-3 space-y-2 text-sm border-t pt-3 border-slate-200">
+                      <p className="text-slate-700 leading-relaxed"><span className="font-bold text-blue-600">العربية:</span> {video.descriptionAr}</p>
+                      <p className="text-slate-600 leading-relaxed italic"><span className="font-bold text-blue-600">English:</span> {video.descriptionEn}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Arduino Guide PDF */}
+            {selectedVideo?.hasGuide && (
+              <div className="mt-6 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg">
+                <h4 className="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                  <span>📚</span> دليل تعليمي مفصل
+                </h4>
+                <p className="text-slate-600 mb-4">دليل شامل عن الأردوينو والدوائر الإلكترونية مبسط للطلاب (12-15 سنة)</p>
+                <a
+                  href={selectedVideo.guidePdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+                >
+                  <Download className="w-4 h-4" />
+                  تحميل الدليل (PDF)
+                </a>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* ===== MODAL FOR COURSE DETAILS ===== */}
       <Dialog open={!!selectedCourse} onOpenChange={() => setSelectedCourse(null)}>
@@ -406,6 +597,7 @@ export default function Home() {
               <h4 className="font-bold mb-4">روابط سريعة</h4>
               <ul className="space-y-2 text-slate-400">
                 <li><a href="#products" className="hover:text-white transition">المتجر</a></li>
+                <li><a href="#videos" className="hover:text-white transition">الفيديوهات</a></li>
                 <li><a href="#courses" className="hover:text-white transition">الدورات</a></li>
               </ul>
             </div>
