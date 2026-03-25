@@ -261,9 +261,9 @@ export default function Home() {
             <h1 className="text-2xl font-bold text-slate-900">CodeBitsLern</h1>
           </div>
           <nav className="hidden md:flex items-center gap-6">
-            <a href="#products" className="text-slate-700 hover:text-slate-900 font-medium">المتجر</a>
-            <a href="#videos" className="text-slate-700 hover:text-slate-900 font-medium">الفيديوهات</a>
-            <a href="#courses" className="text-slate-700 hover:text-slate-900 font-medium">الدورات</a>
+            <a href="#/products" className="text-slate-700 hover:text-slate-900 font-medium">المتجر</a>
+            <a href="#/videos" className="text-slate-700 hover:text-slate-900 font-medium">الفيديوهات</a>
+            <a href="#/courses" className="text-slate-700 hover:text-slate-900 font-medium">الدورات</a>
             <button 
               onClick={() => setCartOpen(true)}
               className="relative p-2 hover:bg-slate-100 rounded-lg transition"
@@ -317,7 +317,7 @@ export default function Home() {
               </button>
             ))}
             <a
-              href="#videos"
+              href="#/videos"
               className="px-6 py-2 rounded-lg font-medium transition bg-white text-slate-700 border border-slate-300 hover:border-blue-600 hover:text-blue-600"
             >
               فيديوهات
@@ -602,9 +602,9 @@ export default function Home() {
             <div>
               <h4 className="font-bold mb-4">روابط سريعة</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="#products" className="hover:text-white transition">المتجر</a></li>
-                <li><a href="#videos" className="hover:text-white transition">الفيديوهات</a></li>
-                <li><a href="#courses" className="hover:text-white transition">الدورات</a></li>
+                <li><a href="#/products" className="hover:text-white transition">المتجر</a></li>
+                <li><a href="#/videos" className="hover:text-white transition">الفيديوهات</a></li>
+                <li><a href="#/courses" className="hover:text-white transition">الدورات</a></li>
               </ul>
             </div>
             <div>
