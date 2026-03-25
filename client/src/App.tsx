@@ -1,18 +1,18 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Router as WouterRouter, Switch } from "wouter";
+import { Route, Switch } from "wouter";
+import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
 
 function Router() {
+  const [location] = useHashLocation();
   return (
-    <Switch>
+    <Switch location={location}>
       <Route path="/" component={Home} />
-      <Route path="/CodeBitsLern" component={Home} />
-      <Route path="/CodeBitsLern/" component={Home} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
@@ -33,7 +33,9 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <div className="contents">
+            <Router />
+          </div>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
