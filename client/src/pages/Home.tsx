@@ -120,12 +120,12 @@ const videoCategories = [
     courses: [
       { 
         id: 3001, 
-        title: "شرح دارة الأردوينو والحساسات - Arduino Circuits & Sensors", 
+        title: "أجزاء الأردوينو || Arduino Components", 
         level: "مبتدئ",
         isVideo: true,
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-        descriptionAr: "شرح مبسط لأجزاء الأردوينو، الحساسات، وكيفية عمل الدارات الإلكترونية.",
-        descriptionEn: "Simple explanation of Arduino parts, sensors, and how electronic circuits work."
+        videoUrl: "https://www.youtube.com/embed/AhBBJZxLJ10",
+        descriptionAr: "فيديو تعليمي يشرح مكونات لوحة الأردوينو UNO، المعالج، والمنافذ الرقمية والتماثلية وكيفية البدء في البرمجة.",
+        descriptionEn: "Educational video explaining Arduino UNO components, microcontroller, digital/analog pins, and how to start programming."
       }
     ]
   },
