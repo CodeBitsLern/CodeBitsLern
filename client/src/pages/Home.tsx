@@ -113,9 +113,9 @@ const videoCategories = [
   },
   {
     id: 3,
-    name: "دارات الأردوينو",
+    name: "أردوينو",
     icon: "⚡",
-    description: "فيديوهات تعليمية عن الأردوينو والحساسات (عربي/إنجليزي)",
+    description: "فيديوهات تعليمية شاملة عن الأردوينو والحساسات والدوائر الإلكترونية",
     count: 1,
     courses: [
       { 
@@ -123,13 +123,11 @@ const videoCategories = [
         title: "شرح دارة الأردوينو والحساسات - Arduino Circuits & Sensors", 
         level: "مبتدئ",
         isVideo: true,
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // رابط تجريبي، يمكن تغييره لاحقاً
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         descriptionAr: "شرح مبسط لأجزاء الأردوينو، الحساسات، وكيفية عمل الدارات الإلكترونية.",
         descriptionEn: "Simple explanation of Arduino parts, sensors, and how electronic circuits work."
       }
-    ],
-    hasGuide: true,
-    guidePdf: "https://d2xsxph8kpxj0f.cloudfront.net/310519663468821472/AgZazcxMHr4gj4EXiFKxW4/arduino_guide_f39df1c4.pdf"
+    ]
   },
   {
     id: 4,
