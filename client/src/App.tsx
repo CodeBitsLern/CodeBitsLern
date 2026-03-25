@@ -8,16 +8,14 @@ import Home from "./pages/Home";
 
 
 function Router() {
-  const base = "/CodeBitsLern";
   return (
-    <WouterRouter base={base}>
-      <Switch>
-        <Route path={"/"} component={Home} />
-        <Route path={"/404"} component={NotFound} />
-        {/* Final fallback route */}
-        <Route component={NotFound} />
-      </Switch>
-    </WouterRouter>
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/CodeBitsLern" component={Home} />
+      <Route path="/CodeBitsLern/" component={Home} />
+      <Route path="/404" component={NotFound} />
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 
