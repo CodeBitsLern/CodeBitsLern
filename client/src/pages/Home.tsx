@@ -323,6 +323,12 @@ export default function Home() {
                 {filter === 'all' ? 'الكل' : filter === 'code' ? 'أكواد' : filter === 'software' ? 'برامج' : 'فيديوهات'}
               </button>
             ))}
+            <a
+              href="#/videos"
+              className="px-6 py-2 rounded-lg font-medium transition bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-lg border-2 border-purple-600"
+            >
+              🎥 الفيديوهات التعليمية
+            </a>
           </div>
 
           {/* Products Grid */}
