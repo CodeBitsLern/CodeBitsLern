@@ -1,16 +1,5 @@
 <?php
-// بيانات الاتصال بقاعدة البيانات
-$servername = sql204.infinityfree.com;
-$username = if0_41550057;
-$password = 7OVcbylpBDE;
-$dbname = if0_41550057_codebitslern_at;
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// التأكد من نجاح الاتصال
-if ($conn->connect_error) {
-    die("فشل الاتصال: " . $conn->connect_error);
-}
+require_once 'db.php';
 
 // إذا تم إرسال النموذج (Form)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

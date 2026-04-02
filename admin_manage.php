@@ -1,11 +1,5 @@
 <?php
-// بيانات الاتصال
-$servername = sql204.infinityfree.com;
-$username = if0_41550057;
-$password = 7OVcbylpBDE;
-$dbname = if0_41550057_codebitslern_at;
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once 'db.php';
 
 // حذف منتج إذا تم طلب ذلك
 if (isset($_GET['delete'])) {

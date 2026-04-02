@@ -1,10 +1,5 @@
 <?php
-$servername = sql204.infinityfree.com;
-$username = if0_41550057;
-$password = 7OVcbylpBDE;
-$dbname = if0_41550057_codebitslern_at;
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once 'db.php';
 
 $id = $_GET['id'];
 $product = $conn->query("SELECT * FROM products WHERE id=$id")->fetch_assoc();
