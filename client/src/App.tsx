@@ -6,16 +6,26 @@ import { useHashLocation } from "wouter/use-hash-location";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import Navbar from "./components/Navbar";
 
 
 function Router() {
   const [location] = useHashLocation();
   return (
-    <Switch location={location}>
-      <Route path="/" component={Home} />
-      <Route path="/404" component={NotFound} />
-      <Route component={Home} />
-    </Switch>
+    <>
+      <Navbar />
+      <Switch location={location}>
+        <Route path="/" component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/404" component={NotFound} />
+        <Route component={Home} />
+      </Switch>
+    </>
   );
 }
 
