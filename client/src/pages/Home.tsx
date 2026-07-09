@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Folder, ChevronRight, FileText, Download, PlayCircle, Star, TrendingUp, Zap } from 'lucide-react';
+import { Folder, ChevronRight, FileText, Download, PlayCircle, Star, TrendingUp, Zap, Code2, Lightbulb, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 // ===== PRODUCTS DATA =====
 const products = [
@@ -298,25 +299,188 @@ export default function Home() {
       </header>
 
       {/* ===== HERO SECTION ===== */}
-      <section className="relative py-20 px-4 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <section className="relative min-h-screen px-4 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white overflow-hidden flex items-center">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Gradient orbs */}
+          <motion.div 
+            className="absolute top-10 right-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+            animate={{ 
+              x: [0, 50, 0],
+              y: [0, 30, 0]
+            }}
+            transition={{ duration: 8, repeat: Infinity }}
+          ></motion.div>
+          <motion.div 
+            className="absolute bottom-10 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+            animate={{ 
+              x: [0, -50, 0],
+              y: [0, -30, 0]
+            }}
+            transition={{ duration: 8, repeat: Infinity, delay: 1 }}
+          ></motion.div>
+          <motion.div 
+            className="absolute top-1/2 left-1/2 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1]
+            }}
+            transition={{ duration: 6, repeat: Infinity }}
+          ></motion.div>
+          
+          {/* Grid pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(255,255,255,.05) 25%, rgba(255,255,255,.05) 26%, transparent 27%, transparent 74%, rgba(255,255,255,.05) 75%, rgba(255,255,255,.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255,255,255,.05) 25%, rgba(255,255,255,.05) 26%, transparent 27%, transparent 74%, rgba(255,255,255,.05) 75%, rgba(255,255,255,.05) 76%, transparent 77%, transparent)',
+              backgroundSize: '50px 50px'
+            }}></div>
+          </div>
+        </div>
         
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="mb-6 inline-block">
-            <span className="text-6xl animate-bounce">🚀</span>
+        <div className="max-w-7xl mx-auto w-full relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left content */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-right"
+            >
+              {/* Badge */}
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 bg-blue-500/20 border border-blue-400/50 rounded-full px-4 py-2 mb-6 backdrop-blur-sm"
+              >
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span className="text-sm font-semibold text-blue-200">🎉 منصة تعليمية متقدمة</span>
+              </motion.div>
+              
+              {/* Main heading */}
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-5xl md:text-7xl font-black mb-6 leading-tight"
+              >
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">CodeBitsLern</span>
+              </motion.h1>
+              
+              {/* Subtitle */}
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed"
+              >
+                تعلم البرمجة من الصفر إلى الاحتراف مع أفضل المحتوى التعليمي والمشاريع العملية
+              </motion.p>
+              
+              {/* Key features */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="space-y-3 mb-8"
+              >
+                {[
+                  { icon: Code2, text: '68+ دورة تعليمية متقدمة' },
+                  { icon: Users, text: 'آلاف الطلاب حول العالم' },
+                  { icon: Lightbulb, text: 'مشاريع عملية وحقيقية' }
+                ].map((feature, idx) => (
+                  <motion.div 
+                    key={idx}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 + idx * 0.1 }}
+                    className="flex items-center gap-3 text-slate-200"
+                  >
+                    <feature.icon className="w-5 h-5 text-cyan-400" />
+                    <span className="font-medium">{feature.text}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+              
+              {/* CTA Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="flex gap-4 flex-wrap"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold text-lg px-8 py-6 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                    🚀 ابدأ التعلم الآن
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button variant="outline" className="border-2 border-cyan-400 text-cyan-300 hover:bg-cyan-500/10 font-bold text-lg px-8 py-6 rounded-lg transition-all duration-300">
+                    📚 استكشف الدورات
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+            
+            {/* Right side - Animated illustration */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="hidden lg:block relative h-96"
+            >
+              {/* Floating cards */}
+              <motion.div 
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute top-0 right-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-400/30 rounded-lg p-6 backdrop-blur-sm w-64 shadow-xl"
+              >
+                <div className="text-4xl mb-3">💻</div>
+                <h3 className="text-lg font-bold text-white mb-2">تطوير الويب</h3>
+                <p className="text-sm text-slate-300">HTML, CSS, JavaScript, React, Node.js</p>
+              </motion.div>
+              
+              <motion.div 
+                animate={{ y: [0, 20, 0] }}
+                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                className="absolute bottom-10 left-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-400/30 rounded-lg p-6 backdrop-blur-sm w-64 shadow-xl"
+              >
+                <div className="text-4xl mb-3">🐍</div>
+                <h3 className="text-lg font-bold text-white mb-2">Python والذكاء الاصطناعي</h3>
+                <p className="text-sm text-slate-300">ML, Deep Learning, Data Science</p>
+              </motion.div>
+              
+              <motion.div 
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+                className="absolute top-1/3 right-1/3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border border-cyan-400/30 rounded-lg p-6 backdrop-blur-sm w-64 shadow-xl"
+              >
+                <div className="text-4xl mb-3">📱</div>
+                <h3 className="text-lg font-bold text-white mb-2">تطوير التطبيقات</h3>
+                <p className="text-sm text-slate-300">Flutter, React Native, Swift</p>
+              </motion.div>
+            </motion.div>
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">مرحباً بك في CodeBitsLern</h2>
-          <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-2xl mx-auto">منصتك الأول لتعلم البرمجة واحتراف التطوير مع أفضل المحتوى التعليمي</p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button className="bg-white text-blue-600 hover:bg-blue-50 font-bold text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              تصفح المتجر
-            </Button>
-            <Button variant="outline" className="border-2 border-white text-white hover:bg-blue-700 font-bold text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              شاهد الفيديوهات
-            </Button>
-          </div>
+          
+          {/* Scroll indicator */}
+          <motion.div 
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center"
+          >
+            <p className="text-sm text-slate-400 mb-2">اسحب لأسفل</p>
+            <div className="flex justify-center">
+              <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
+          </motion.div>
         </div>
       </section>
 
