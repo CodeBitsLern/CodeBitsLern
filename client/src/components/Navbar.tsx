@@ -18,43 +18,71 @@ export default function Navbar() {
     navigate("/login");
   };
 
+  const scrollToSection = (sectionId: string) => {
+    setIsMenuOpen(false);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full border-b border-slate-700 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-lg">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground">
-            <Code2 className="w-6 h-6" />
+        <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity" onClick={() => navigate('/')}>
+          <div className="text-3xl">💻</div>
+          <div className="hidden sm:block">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
+              CodeBitsLern
+            </h1>
+            <p className="text-xs text-slate-400">تعلم البرمجة واحترفها</p>
           </div>
-          <span className="hidden sm:inline font-bold text-lg text-foreground">
-            CodeBitsLern
-          </span>
         </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+          <button
+            onClick={() => navigate('/')}
+            className="text-sm font-medium text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+          >
+            <span className="group-hover:scale-110 transition-transform">🏠</span>
             الرئيسية
-          </a>
-          <a href="#features" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            الميزات
-          </a>
-          <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            عن التطبيق
-          </a>
+          </button>
+          <button
+            onClick={() => scrollToSection('products')}
+            className="text-sm font-medium text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+          >
+            <span className="group-hover:scale-110 transition-transform">🛒</span>
+            المنتجات
+          </button>
+          <button
+            onClick={() => scrollToSection('videos')}
+            className="text-sm font-medium text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+          >
+            <span className="group-hover:scale-110 transition-transform">🎥</span>
+            الفيديوهات
+          </button>
+          <button
+            onClick={() => scrollToSection('courses')}
+            className="text-sm font-medium text-slate-300 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+          >
+            <span className="group-hover:scale-110 transition-transform">📚</span>
+            الدورات
+          </button>
         </div>
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center gap-3">
           {isAuthenticated && user ? (
             <>
-              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-secondary/50">
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-primary">
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-500/20 border border-blue-500/30">
+                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center">
+                  <span className="text-xs font-bold text-white">
                     {user.name?.charAt(0).toUpperCase() || "U"}
                   </span>
                 </div>
-                <span className="text-sm font-medium text-foreground">
+                <span className="text-sm font-medium text-slate-200">
                   {user.name || user.email}
                 </span>
               </div>
@@ -63,10 +91,10 @@ export default function Navbar() {
                 size="sm"
                 onClick={handleLogout}
                 disabled={logoutMutation.isPending}
-                className="gap-2"
+                className="gap-2 bg-red-600/20 border-red-500/50 hover:bg-red-600/30 text-red-300 hover:text-red-200"
               >
                 <LogOut className="w-4 h-4" />
-                تسجيل الخروج
+                خروج
               </Button>
             </>
           ) : (
@@ -75,12 +103,14 @@ export default function Navbar() {
                 variant="ghost"
                 size="sm"
                 onClick={() => navigate("/login")}
+                className="text-slate-300 hover:text-white hover:bg-slate-700/50"
               >
-                تسجيل الدخول
+                دخول
               </Button>
               <Button
                 size="sm"
                 onClick={() => navigate("/signup")}
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
               >
                 إنشاء حساب
               </Button>
@@ -91,7 +121,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+          className="md:hidden p-2 hover:bg-slate-700/50 rounded-lg transition-colors text-slate-300 hover:text-white"
         >
           {isMenuOpen ? (
             <X className="w-5 h-5" />
@@ -103,31 +133,33 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background">
+        <div className="md:hidden border-t border-slate-700 bg-gradient-to-b from-slate-800 to-slate-900">
           <div className="container py-4 space-y-3">
-            <a
-              href="/"
-              className="block px-3 py-2 rounded-lg hover:bg-secondary text-sm font-medium transition-colors"
-              onClick={() => setIsMenuOpen(false)}
+            <button
+              onClick={() => navigate('/')}
+              className="block w-full text-right px-3 py-2 rounded-lg hover:bg-slate-700/50 text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
-              الرئيسية
-            </a>
-            <a
-              href="#features"
-              className="block px-3 py-2 rounded-lg hover:bg-secondary text-sm font-medium transition-colors"
-              onClick={() => setIsMenuOpen(false)}
+              🏠 الرئيسية
+            </button>
+            <button
+              onClick={() => scrollToSection('products')}
+              className="block w-full text-right px-3 py-2 rounded-lg hover:bg-slate-700/50 text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
-              الميزات
-            </a>
-            <a
-              href="#about"
-              className="block px-3 py-2 rounded-lg hover:bg-secondary text-sm font-medium transition-colors"
-              onClick={() => setIsMenuOpen(false)}
+              🛒 المنتجات
+            </button>
+            <button
+              onClick={() => scrollToSection('videos')}
+              className="block w-full text-right px-3 py-2 rounded-lg hover:bg-slate-700/50 text-sm font-medium text-slate-300 hover:text-white transition-colors"
             >
-              عن التطبيق
-            </a>
-
-            <div className="border-t border-border pt-3 space-y-2">
+              🎥 الفيديوهات
+            </button>
+            <button
+              onClick={() => scrollToSection('courses')}
+              className="block w-full text-right px-3 py-2 rounded-lg hover:bg-slate-700/50 text-sm font-medium text-slate-300 hover:text-white transition-colors"
+            >
+              📚 الدورات
+            </button>
+            <div className="border-t border-slate-700 pt-3 space-y-2">
               {isAuthenticated && user ? (
                 <>
                   <div className="px-3 py-2 text-sm font-medium text-foreground">
@@ -138,7 +170,7 @@ export default function Navbar() {
                     size="sm"
                     onClick={handleLogout}
                     disabled={logoutMutation.isPending}
-                    className="w-full gap-2 justify-center"
+                    className="w-full gap-2 justify-center bg-red-600/20 border-red-500/50 hover:bg-red-600/30 text-red-300 hover:text-red-200"
                   >
                     <LogOut className="w-4 h-4" />
                     تسجيل الخروج
@@ -153,7 +185,7 @@ export default function Navbar() {
                       navigate("/login");
                       setIsMenuOpen(false);
                     }}
-                    className="w-full"
+                    className="w-full text-slate-300 hover:text-white hover:bg-slate-700/50"
                   >
                     تسجيل الدخول
                   </Button>
@@ -163,7 +195,7 @@ export default function Navbar() {
                       navigate("/signup");
                       setIsMenuOpen(false);
                     }}
-                    className="w-full"
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
                   >
                     إنشاء حساب
                   </Button>
