@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+import Blog from "./pages/Blog";
+import ArduinoSimulator from "./pages/ArduinoSimulator";
 import Navbar from "./components/Navbar";
 
 
@@ -19,6 +21,8 @@ function Router() {
       <Navbar />
       <Switch location={location}>
         <Route path="/" component={Home} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/arduino" component={ArduinoSimulator} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/dashboard" component={Dashboard} />
